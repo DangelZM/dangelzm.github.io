@@ -6,7 +6,8 @@
 </head>
 <body>
 <script>
-const name = 'black';
+(() => {
+	const name = 'black';
 return fetch(`https://www.instagram.com/${name}/`)
   .then(res => res.text())
   .then(txt => {
@@ -54,6 +55,7 @@ function renderWidget(sharedData) {
 
 	document.body.appendChild(html);
 }
+})()
 </script>
 </body>
 </html>
