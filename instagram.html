@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+const name = 'black';
+return fetch(`https://www.instagram.com/${name}/`)
+  .then(res => res.text())
+  .then(txt => {
+    const doc = parsePage(txt);
+    const sharedData = getData(doc);
+    renderWidget(sharedData);
+  })
+  .catch(console.log);
+
+function parsePage(txt) {
+  const domParser = new DOMParser();
+  const doc = domParser.parseFromString(txt, "text/html");
+  return doc;
+}
+
+function getData(doc) {
+  const scripts = Array.from(doc.querySelectorAll('script'));
+  const sharedDataRawText = scripts.filter(item => 
+    item.textContent.indexOf('_sharedData') > -1
+  )[0];
+
+  if (sharedDataRawText) {
+    const sharedDataJSONText = sharedDataRawText.textContent.trim().match(/\=\ (.*);/)[1];
+    let sharedData;
+    try {
+      sharedData = JSON.parse(sharedDataJSONText);
+    } catch(err) {
+      console.warn(err);
+    }
+    return sharedData;
+  }
+}
+
+function renderWidget(sharedData) {
+  let user = sharedData.entry_data.ProfilePage[0].graphql.user;
+  const html = document.createElement("div");
+  html.setAttribute("id", "list");
+
+  const items = user.edge_owner_to_timeline_media.edges;
+  for(let item of items) {
+    const img = document.createElement("img"); 
+    img.src = item.node.thumbnail_resources[0].src;
+    html.appendChild(img);
+  }
+
+	document.body.appendChild(html);
+}
+</script>
+</body>
+</html>
