@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+(() => {
+const name = 'black';
+return fetch(`https://www.instagram.com/${name}/?__a=1`)
+  .then(res => res.json())
+  .then(json => {
+    renderWidget(json);
+  })
+  .catch(console.log);
+
+
+function renderWidget(json) {
+  let user = json.graphql.user;
+  const html = document.createElement("div");
+  html.setAttribute("id", "list");
+
+  const items = user.edge_owner_to_timeline_media.edges;
+  for(let item of items) {
+    const img = document.createElement("img"); 
+    img.src = item.node.thumbnail_resources[0].src;
+    html.appendChild(img);
+  }
+
+	document.body.appendChild(html);
+}
+
+})()
+</script>
+</body>
+</html>
