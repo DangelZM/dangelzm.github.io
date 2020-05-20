@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+#header {
+    height: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+#content {
+    padding-top: 50px;
+}
+
+.category-widget {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: -12px;
+
+}
+
+.product-item {
+    width: 25%;
+    padding: 12px;
+    flex-basis: auto;
+}
+
+.product-item > img {
+    width: 100%;
+}
