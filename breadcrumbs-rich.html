@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+    <title>Breadcrumbs Test</title>
+    <script type="application/ld+json">
+        [{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Books",
+            "item": "https://dangelzm.github.io/books"
+          },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Science Fiction",
+            "item": "https://dangelzm.github.io/books/sciencefiction"
+          },{
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Award Winners"
+          }]
+        }]
+        </script>
+</head>
+<body>
+    <ol>
+        <li>
+          <a href="https://dangelzm.github.io/books">Books</a>
+        </li>
+        <li>
+          <a href="https://dangelzm.github.io/books/sciencefiction">Science Fiction</a>
+        </li>
+        <li>
+          Award Winners
+        </li>
+      </ol>
+</body>
+</html>
